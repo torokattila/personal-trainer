@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import {
     StyleSheet,
-    ImageBackground,
     View,
-    Text,
     FlatList,
     TouchableOpacity,
     ScrollView
