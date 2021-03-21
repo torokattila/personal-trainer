@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "sdkVersion": "39.0.0",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/workout.png",
     "splash": {
       "image": "./assets/workout.png",
       "resizeMode": "contain",
@@ -24,7 +24,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/workout.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.torcsi.personaltrainer",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
