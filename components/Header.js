@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     header: {
         width: '100%',
         marginBottom: 20,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     headerText: {
         color: 'white',

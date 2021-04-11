@@ -13,9 +13,13 @@ export const HomeStack = ({ navigation }) => (
     <Navigator initialRouteName='Home'
         headerMode="screen"
         screenOptions={{
+            cardStyle: {
+                backgroundColor: '#212121'
+            },
             headerStyle: {
                 backgroundColor: '#212121',
                 height: 120,
+                elevation: 0
             },
             headerTitleStyle: {
                 color: 'white',

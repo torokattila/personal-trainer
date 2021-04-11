@@ -10,16 +10,21 @@ export const ChestStack = ({ navigation }) => (
     <Navigator
         headerMode='screen'
         screenOptions={{
+            cardStyle: {
+                backgroundColor: '#2196F3'
+            },
             headerStyle: {
-                backgroundColor: '#212121',
-                height: 120
+                backgroundColor: '#2196F3',
+                height: 120,
+                elevation: 0,
             },
             headerTitleStyle: {
                 color: 'white',
-                fontFamily: 'nunito-bold'
+                fontFamily: 'nunito-bold',
             },
-            headerTintColor: 'white'
+            headerTintColor: 'white',
         }}
+        
     >
 
         <Screen

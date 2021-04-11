@@ -5,7 +5,8 @@ import {
     View,
     FlatList,
     TouchableOpacity,
-    ScrollView
+    ScrollView,
+    Alert
 } from 'react-native';
 import ListCard from '../shared/ListCard';
 import { backTypeOne, backTypeTwo, shoulderTypeOne, shoulderTypeTwo, shoulderTypeThree } from '../workoutTypes';
@@ -18,45 +19,95 @@ export default function Back() {
     const [localShoulderTypeThree, setLocalShoulderTypeThree] = useState(shoulderTypeThree);
 
     const pressBackTypeOne = (key) => {
-        setLocalBackTypeOne((prevBackType) => {
-            return prevBackType.filter(backType => backType.key != key);
-        });
+        Alert.alert(
+            '',
+            'Are you sure want to delete this card?',
+            [
+                { text: 'Cancel', onPress: () => '', style: 'cancel' },
+                {
+                    text: 'Delete', onPress: () => setLocalBackTypeOne((prevBackType) => {
+                        return prevBackType.filter(backType => backType.key != key);
+                    })
+                }
+            ],
+            { cancelable: true }
+        );
     }
 
     const pressBackTypeTwo = (key) => {
-        setLocalBackTypeTwo((prevBackType) => {
-            return prevBackType.filter(backType => backType.key != key);
-        });
+        Alert.alert(
+            '',
+            'Are you sure want to delete this card?',
+            [
+                { text: 'Cancel', onPress: () => '', style: 'cancel' },
+                {
+                    text: 'Delete', onPress: () => setLocalBackTypeTwo((prevBackType) => {
+                        return prevBackType.filter(backType => backType.key != key);
+                    })
+                }
+            ],
+            { cancelable: true }
+        );
     }
 
     const pressShoulderTypeOne = (key) => {
-        setLocalShoulderTypeOne((prevShoulderType) => {
-            return prevShoulderType.filter(shoulderType => shoulderType.key != key);
-        });
+        Alert.alert(
+            '',
+            'Are you sure want to delete this card?',
+            [
+                { text: 'Cancel', onPress: () => '', style: 'cancel' },
+                {
+                    text: 'Delete', onPress: () => setLocalShoulderTypeOne((prevShoulderType) => {
+                        return prevShoulderType.filter(shoulderType => shoulderType.key != key);
+                    })
+                }
+            ],
+            { cancelable: true }
+        );
     }
 
     const pressShoulderTypeTwo = (key) => {
-        setLocalShoulderTypeTwo((prevShoulderType) => {
-            return prevShoulderType.filter(shoulderType => shoulderType.key != key);
-        });
+        Alert.alert(
+            '',
+            'Are you sure want to delete this card?',
+            [
+                { text: 'Cancel', onPress: () => '', style: 'cancel' },
+                {
+                    text: 'Delete', onPress: () => setLocalShoulderTypeTwo((prevShoulderType) => {
+                        return prevShoulderType.filter(shoulderType => shoulderType.key != key);
+                    })
+                }
+            ],
+            { cancelable: true }
+        );
     }
 
     const pressShoulderTypeThree = (key) => {
-        setLocalShoulderTypeThree((prevShoulderType) => {
-            return prevShoulderType.filter(shoulderType => shoulderType.key != key);
-        });
+        Alert.alert(
+            '',
+            'Are you sure want to delete this card?',
+            [
+                { text: 'Cancel', onPress: () => '', style: 'cancel' },
+                {
+                    text: 'Delete', onPress: () => setLocalShoulderTypeThree((prevShoulderType) => {
+                        return prevShoulderType.filter(shoulderType => shoulderType.key != key);
+                    })
+                }
+            ],
+            { cancelable: true }
+        );
     }
 
     return (
         <View style={styles.container}>
-            <ScrollView>
+            <ScrollView style={{ marginTop: 5 }}>
                 <View style={styles.workoutTypeView}>
                     <Text style={styles.workoutTypeTitle}>Back Type 1</Text>
                     <FlatList
                         data={localBackTypeOne}
                         renderItem={({ item }) => (
                             <TouchableOpacity onPress={() => pressBackTypeOne(item.key)}>
-                                <ListCard>
+                                <ListCard cardColorType="Back">
                                     <Text style={styles.cardText}>{item.title}</Text>
                                 </ListCard>
                             </TouchableOpacity>
@@ -70,7 +121,7 @@ export default function Back() {
                         data={localBackTypeTwo}
                         renderItem={({ item }) => (
                             <TouchableOpacity onPress={() => pressBackTypeTwo(item.key)}>
-                                <ListCard>
+                                <ListCard cardColorType="Back">
                                     <Text style={styles.cardText}>{item.title}</Text>
                                 </ListCard>
                             </TouchableOpacity>
@@ -84,7 +135,7 @@ export default function Back() {
                         data={localShoulderTypeOne}
                         renderItem={({ item }) => (
                             <TouchableOpacity onPress={() => pressShoulderTypeOne(item.key)}>
-                                <ListCard>
+                                <ListCard cardColorType="Back">
                                     <Text style={styles.cardText}>{item.title}</Text>
                                 </ListCard>
                             </TouchableOpacity>
@@ -98,7 +149,7 @@ export default function Back() {
                         data={localShoulderTypeTwo}
                         renderItem={({ item }) => (
                             <TouchableOpacity onPress={() => pressShoulderTypeTwo(item.key)}>
-                                <ListCard>
+                                <ListCard cardColorType="Back">
                                     <Text style={styles.cardText}>{item.title}</Text>
                                 </ListCard>
                             </TouchableOpacity>
@@ -112,7 +163,7 @@ export default function Back() {
                         data={localShoulderTypeThree}
                         renderItem={({ item }) => (
                             <TouchableOpacity onPress={() => pressShoulderTypeThree(item.key)}>
-                                <ListCard>
+                                <ListCard cardColorType="Back">
                                     <Text style={styles.cardText}>{item.title}</Text>
                                 </ListCard>
                             </TouchableOpacity>
@@ -120,7 +171,7 @@ export default function Back() {
                     />
                 </View>
             </ScrollView>
-        </View>
+        </View >
     )
 }
 
@@ -128,19 +179,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#787878'
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40
     },
     workoutTypeView: {
         marginTop: 30
     },
     workoutTypeTitle: {
         fontFamily: 'nunito-bold',
-        color: '#fff',
+        color: '#424242',
         fontSize: 20,
         textAlign: 'center'
     },
     cardText: {
         fontFamily: 'nunito-bold',
-        fontSize: 15
+        fontSize: 20,
+        color: '#fff'
     }
 });

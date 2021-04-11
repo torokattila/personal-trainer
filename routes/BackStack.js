@@ -10,9 +10,13 @@ export const BackStack = ({ navigation }) => (
     <Navigator
         headerMode='screen'
         screenOptions={{
+            cardStyle: {
+                backgroundColor: '#009688'
+            },
             headerStyle: {
-                backgroundColor: '#212121',
-                height: 120
+                backgroundColor: '#009688',
+                height: 120,
+                elevation: 0,
             },
             headerTitleStyle: {
                 color: 'white',

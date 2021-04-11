@@ -5,7 +5,8 @@ import {
     View,
     FlatList,
     TouchableOpacity,
-    ScrollView
+    ScrollView,
+    Alert
 } from 'react-native';
 import ListCard from '../shared/ListCard';
 import { chestTypeOne, chestTypeTwo, bicepTypeOne, bicepTypeTwo, bicepTypeThree } from '../workoutTypes';
@@ -18,45 +19,96 @@ export default function Chest() {
     const [localBicepTypeThree, setLocalBicepTypeThree] = useState(bicepTypeThree);
 
     const pressChessTypeOne = (key) => {
-        setLocalChestTypeOne((prevChestType) => {
-            return prevChestType.filter(chestType => chestType.key != key);
-        });
+        Alert.alert(
+            '',
+            'Are you sure want to delete this card?',
+            [
+                { text: 'Cancel', onPress: () => '', style: 'cancel' },
+                {
+                    text: 'Delete', onPress: () => setLocalChestTypeOne((prevChestType) => {
+                        return prevChestType.filter(chestType => chestType.key != key);
+                    })
+                }
+            ],
+            { cancelable: true }
+        );
     }
 
     const pressChessTypeTwo = (key) => {
-        setLocalChestTypeTwo((prevChestType) => {
-            return prevChestType.filter(chestType => chestType.key != key);
-        });
+        Alert.alert(
+            '',
+            'Are you sure want to delete this card?',
+            [
+                { text: 'Cancel', onPress: () => '', style: 'cancel' },
+                {
+                    text: 'Delete', onPress: () => setLocalChestTypeTwo((prevChestType) => {
+                        return prevChestType.filter(chestType => chestType.key != key);
+                    })
+                }
+            ],
+            { cancelable: true }
+        );
     }
 
     const pressBicepTypeOne = (key) => {
-        setLocalBicepTypeOne((prevBicepType) => {
-            return prevBicepType.filter(bicepType => bicepType.key != key);
-        });
+        Alert.alert(
+            '',
+            'Are you sure want to delete this card?',
+            [
+                { text: 'Cancel', onPress: () => '', style: 'cancel' },
+                {
+                    text: 'Delete', onPress: () => setLocalBicepTypeOne((prevBicepType) => {
+                        return prevBicepType.filter(bicepType => bicepType.key != key);
+                    })
+                }
+            ],
+            { cancelable: true }
+        );
     }
 
     const pressBicepTypeTwo = (key) => {
-        setLocalBicepTypeTwo((prevBicepType) => {
-            return prevBicepType.filter(bicepType => bicepType.key != key);
-        });
+        Alert.alert(
+            '',
+            'Are you sure want to delete this card?',
+            [
+                { text: 'Cancel', onPress: () => '', style: 'cancel' },
+                {
+                    text: 'Delete', onPress: () => setLocalBicepTypeTwo((prevBicepType) => {
+                        return prevBicepType.filter(bicepType => bicepType.key != key);
+                    })
+                }
+            ],
+            { cancelable: true }
+        );
     }
 
     const pressBicepTypeThree = (key) => {
-        setLocalBicepTypeThree((prevBicepType) => {
-            return prevBicepType.filter(bicepType => bicepType.key != key);
-        });
+        Alert.alert(
+            '',
+            'Are you sure want to delete this card?',
+            [
+                { text: 'Cancel', onPress: () => '', style: 'cancel' },
+                {
+                    text: 'Delete', onPress: () => setLocalBicepTypeThree((prevBicepType) => {
+                        return prevBicepType.filter(bicepType => bicepType.key != key);
+                    })
+                }
+            ],
+            { cancelable: true }
+        );
     }
 
     return (
         <View style={styles.container}>
-            <ScrollView>
+            <ScrollView style={{ marginTop: 5, borderRadius: 20 }}>
                 <View style={styles.workoutTypeView}>
                     <Text style={styles.workoutTypeTitle}>Chest Type 1</Text>
                     <FlatList
                         data={localChestTypeOne}
+                        keyExtractor={(item, index) => item.key}
                         renderItem={({ item }) => (
                             <TouchableOpacity onPress={() => pressChessTypeOne(item.key)}>
-                                <ListCard>
+                                <ListCard cardColorType="Chest">
                                     <Text style={styles.cardText}>{item.title}</Text>
                                 </ListCard>
                             </TouchableOpacity>
@@ -68,9 +120,10 @@ export default function Chest() {
                     <Text style={styles.workoutTypeTitle}>Chest Type 2</Text>
                     <FlatList
                         data={localChestTypeTwo}
+                        keyExtractor={(item, index) => item.key}
                         renderItem={({ item }) => (
                             <TouchableOpacity onPress={() => pressChessTypeTwo(item.key)}>
-                                <ListCard>
+                                <ListCard cardColorType="Chest">
                                     <Text style={styles.cardText}>{item.title}</Text>
                                 </ListCard>
                             </TouchableOpacity>
@@ -82,9 +135,10 @@ export default function Chest() {
                     <Text style={styles.workoutTypeTitle}>Bicep Type 1</Text>
                     <FlatList
                         data={localBicepTypeOne}
+                        keyExtractor={(item, index) => item.key}
                         renderItem={({ item }) => (
                             <TouchableOpacity onPress={() => pressBicepTypeOne(item.key)}>
-                                <ListCard>
+                                <ListCard cardColorType="Chest">
                                     <Text style={styles.cardText}>{item.title}</Text>
                                 </ListCard>
                             </TouchableOpacity>
@@ -96,9 +150,10 @@ export default function Chest() {
                     <Text style={styles.workoutTypeTitle}>Bicep Type 2</Text>
                     <FlatList
                         data={localBicepTypeTwo}
+                        keyExtractor={(item, index) => item.key}
                         renderItem={({ item }) => (
                             <TouchableOpacity onPress={() => pressBicepTypeTwo(item.key)}>
-                                <ListCard>
+                                <ListCard cardColorType="Chest">
                                     <Text style={styles.cardText}>{item.title}</Text>
                                 </ListCard>
                             </TouchableOpacity>
@@ -110,9 +165,10 @@ export default function Chest() {
                     <Text style={styles.workoutTypeTitle}>Bicep Type 3</Text>
                     <FlatList
                         data={localBicepTypeThree}
+                        keyExtractor={(item, index) => item.key}
                         renderItem={({ item }) => (
                             <TouchableOpacity onPress={() => pressBicepTypeThree(item.key)}>
-                                <ListCard>
+                                <ListCard cardColorType="Chest">
                                     <Text style={styles.cardText}>{item.title}</Text>
                                 </ListCard>
                             </TouchableOpacity>
@@ -128,19 +184,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#787878'
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
     },
     workoutTypeView: {
-        marginTop: 30
+        marginTop: 30,
     },
     workoutTypeTitle: {
         fontFamily: 'nunito-bold',
-        color: '#fff',
+        color: '#212121',
         fontSize: 20,
         textAlign: 'center'
     },
     cardText: {
         fontFamily: 'nunito-bold',
-        fontSize: 15
+        fontSize: 20,
+        color: 'white'
     }
 });

@@ -10,9 +10,13 @@ export const TricepStack = ({ navigation }) => (
     <Navigator
         headerMode='screen'
         screenOptions={{
+            cardStyle: {
+                backgroundColor: '#E65100'
+            },
             headerStyle: {
-                backgroundColor: '#212121',
-                height: 120
+                backgroundColor: '#E65100',
+                height: 120,
+                elevation: 0,
             },
             headerTitleStyle: {
                 color: 'white',

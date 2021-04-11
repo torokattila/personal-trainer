@@ -5,7 +5,8 @@ import {
     View,
     FlatList,
     TouchableOpacity,
-    ScrollView
+    ScrollView,
+    Alert
 } from 'react-native';
 import ListCard from '../shared/ListCard';
 import { tricepType } from '../workoutTypes';
@@ -14,9 +15,19 @@ export default function Back() {
     const [localTricepType, setLocalTricepType] = useState(tricepType);
 
     const pressTricepType = (key) => {
-        setLocalTricepType((prevTricepType) => {
-            return prevTricepType.filter(tricepType => tricepType.key != key);
-        });
+        Alert.alert(
+            '',
+            'Are you sure want to delete this card?',
+            [
+                { text: 'Cancel', onPress: () => '', style: 'cancel' },
+                {
+                    text: 'Delete', onPress: () => setLocalTricepType((prevTricepType) => {
+                        return prevTricepType.filter(tricepType => tricepType.key != key);
+                    })
+                }
+            ],
+            { cancelable: true }
+        );
     }
 
     return (
@@ -44,19 +55,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#787878'
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40
     },
     workoutTypeView: {
         marginTop: 30
     },
     workoutTypeTitle: {
         fontFamily: 'nunito-bold',
-        color: '#fff',
+        color: '#424242',
         fontSize: 20,
         textAlign: 'center'
     },
     cardText: {
         fontFamily: 'nunito-bold',
-        fontSize: 15
+        fontSize: 20,
+        color: '#fff'
     }
 });

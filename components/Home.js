@@ -42,10 +42,13 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         backgroundColor: '#787878',
+        borderTopRightRadius: 40,
+        borderTopLeftRadius: 40,
+        marginTop: 10
     },
     cardStyle: {
         flex: 1,
-        width: 300,
+        width: 320,
         height: '100%',
         elevation: 3,
         shadowOffset: { width: 1, height: 1 },
