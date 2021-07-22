@@ -17,7 +17,7 @@ export default function App() {
     return (
       <View style={styles.container}>
         <AppNavigator />
-        <StatusBar style="inverted" />
+        <StatusBar style="auto" />
       </View>
     );
   } else {
@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'center',
-    fontFamily: 'nunito'
+    fontFamily: 'nunito',
   },
 });

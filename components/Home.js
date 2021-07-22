@@ -17,12 +17,12 @@ export default function Home({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <FlatList
+            <FlatList 
                 data={workoutType}
                 renderItem={({ item }) => (
                     <TouchableOpacity onPress={() => navigation.navigate(item.route, item)}>
                         <ScrollView>
-                            <Card style={styles.cardStyle}>
+                            <Card style={styles.cardStyle} borderRadius={20}>
                                 <CardImage
                                     source={item.image}
                                     title={item.route}
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#787878',
         borderTopRightRadius: 40,
         borderTopLeftRadius: 40,
-        marginTop: 10
+        marginTop: 10,
     },
     cardStyle: {
         flex: 1,
@@ -56,5 +56,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 2,
         marginTop: 35,
+        borderRadius: 20
     },
 })

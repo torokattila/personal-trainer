@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from '../components/Home';
 import Header from '../components/Header';
+import Login from '../components/Login';
 import ChestStack from '../routes/ChestStack';
 import BackStack from '../routes/BackStack';
 import TricepStack from '../routes/TricepStack';
@@ -10,26 +11,31 @@ import TricepStack from '../routes/TricepStack';
 const { Navigator, Screen } = createStackNavigator();
 
 export const HomeStack = ({ navigation }) => (
-    <Navigator initialRouteName='Home'
+    <Navigator initialRouteName='Login'
         headerMode="screen"
         screenOptions={{
             cardStyle: {
-                backgroundColor: '#212121'
+                backgroundColor: '#fff'
             },
             headerStyle: {
-                backgroundColor: '#212121',
-                height: 120,
+                backgroundColor: '#fff',
+                height: 80,
                 elevation: 0
             },
             headerTitleStyle: {
-                color: 'white',
+                color: '#3189DB',
                 fontFamily: 'nunito-bold',
-                fontSize: 25,
+                fontSize: 30,
                 textAlign: 'center'
             },
-            headerTintColor: 'white'
+            headerTintColor: 'black'
         }}
     >
+
+        <Screen 
+            name="Login"
+            component={Login}
+        />
 
         <Screen
             name='Home'
