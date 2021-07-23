@@ -14,42 +14,49 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 
 import axios from "axios";
 
-export const Login = ({ navigation }) => {
+export const Signup = ({ navigation }) => {
 	const [name, setName] = useState("");
 	const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 	const [hidePassword, setHidePassword] = useState(true);
 	const [showAlertWindow, setShowAlertWindow] = useState(false);
 	const [alertMessage, setAlertMessage] = useState("");
 
 	const passwordRef = useRef(null);
+	const confirmPasswordRef = useRef(null);
 
-	const getStorageData = async () => {
-		try {
-			await AsyncStorage.getItem("User").then(response => {
-				if (JSON.parse(response).userId) {
-					navigation.navigate("Home");
-				}
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	};
+    const getStorageData = async () => {
+        try {
+            await AsyncStorage.getItem("User").then(response => {
+                if (JSON.parse(response).userId) {
+                    navigation.navigate("Home");
+                }
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 	const onSubmit = () => {
-		const data = { username: name, password: password };
+        const data = {
+            username: name,
+            password: password,
+            confirmPassword: confirmPassword
+        };
 
-		axios.post("http://192.168.1.71:3001/api/loginuser", data).then(response => {
-			if (response.data.error) {
-				setAlertMessage(response.data.error);
-				showAlert();
-			} else {
-				setName("");
-				setPassword("");
-				AsyncStorage.setItem("User", JSON.stringify(response.data));
-				navigation.navigate("Home");
-			}
-		})
-	};
+        axios.post("http://192.168.1.71:3001/api/registeruser", data).then(response => {
+            if (response.data.error) {
+                setAlertMessage(response.data.error);
+                showAlert();
+            } else {
+                setName("");
+                setPassword("");
+                setConfirmPassword("");
+                AsyncStorage.setItem("User", JSON.stringify(response.data));
+                navigation.navigate("Home");
+            }
+        })
+    };
 
 	const showAlert = () => {
 		setShowAlertWindow(true);
@@ -59,9 +66,9 @@ export const Login = ({ navigation }) => {
 		setShowAlertWindow(false);
 	};
 
-	useEffect(() => {
-		getStorageData();
-	}, []);
+    useEffect(() => {
+        getStorageData();
+    }, []);
 
 	return (
 		<KeyboardAvoidingWrapper>
@@ -110,13 +117,28 @@ export const Login = ({ navigation }) => {
 						setHidePassword={setHidePassword}
 						value={password}
 						ref={passwordRef}
+                        returnKeyType="next"
+						onSubmitEditing={() => confirmPasswordRef.current.focus()}
+					/>
+
+					<Text style={styles.label}>Confrirm Password:</Text>
+					<CustomTextInput
+						placeholder="Confirm Password"
+						icon="lock"
+						secureTextEntry={hidePassword}
+						onChangeText={text => setConfirmPassword(text)}
+						isPassword={true}
+						hidePassword={hidePassword}
+						setHidePassword={setHidePassword}
+						value={confirmPassword}
+						ref={confirmPasswordRef}
 					/>
 
 					<TouchableOpacity
 						style={styles.loginButton}
 						onPress={() => onSubmit()}
 					>
-						<Text style={styles.loginButtonText}>Login</Text>
+						<Text style={styles.loginButtonText}>Sign up</Text>
 					</TouchableOpacity>
 
 					<View style={styles.toggleLoginSugnupContainer}>
@@ -126,11 +148,8 @@ export const Login = ({ navigation }) => {
 						<TouchableOpacity
 							style={styles.toggleLoginSignupLinkButton}
 						>
-							<Text
-								style={styles.toggleLoginSignupLink}
-								onPress={() => navigation.navigate("Signup")}
-							>
-								Sign up
+							<Text style={styles.toggleLoginSignupLink} onPress={() => navigation.navigate("Login")}>
+								Login
 							</Text>
 						</TouchableOpacity>
 					</View>
@@ -186,29 +205,30 @@ const styles = StyleSheet.create({
 		height: 130,
 		justifyContent: "center",
 		alignItems: "center",
-		marginTop: 30
+		marginTop: 0
 	},
 	formContainer: {
-		marginTop: 30,
+		marginTop: 10,
 		alignItems: "center"
 	},
 	label: {
 		fontWeight: "bold",
 		fontSize: 15,
 		color: "#3189DB",
-		marginTop: 20
+		marginTop: 15,
+        marginBottom: -10
 	},
 	customTextInputStyle: {
 		padding: 10,
-		width: 250,
+		width: 270,
 		borderRadius: 50,
 		paddingLeft: 55,
 		borderColor: "#3189DB",
 		borderWidth: 1,
 		fontSize: 16,
 		height: 60,
-		marginVertical: 3,
-		marginBottom: 10,
+		marginVertical: 1,
+		marginBottom: 1,
 		color: "#3189DB"
 	},
 	leftIcon: {
@@ -268,4 +288,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default Login;
+export default Signup;
