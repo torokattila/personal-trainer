@@ -10,6 +10,7 @@ import {
 	AsyncStorage
 } from "react-native";
 import { Card, CardImage } from "react-native-cards";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 
 export default function Home({ navigation }) {
 	const [workoutType, setWorkoutType] = useState([
@@ -80,12 +81,36 @@ export default function Home({ navigation }) {
 							</ScrollView>
 						</TouchableOpacity>}
 				/>
-				<TouchableOpacity
-					style={styles.logoutButton}
-					onPress={() => logout()}
-				>
-					<Text style={styles.logoutButtonText}>Logout</Text>
-				</TouchableOpacity>
+			</View>
+
+			<View style={styles.profileLogoutContainer}>
+				<View style={styles.profileSide}>
+					<TouchableOpacity>
+						<AntDesign
+							name="user"
+							size={27}
+							color="#fff"
+							style={{ left: 2 }}
+						/>
+						<Text style={{ color: "#fff", fontSize: 11 }}>
+							Profile
+						</Text>
+					</TouchableOpacity>
+				</View>
+
+				<View style={styles.logoutSide}>
+					<TouchableOpacity onPress={() => logout()}>
+						<MaterialIcons
+							name="logout"
+							size={27}
+							color="#fff"
+							style={{ left: 5 }}
+						/>
+						<Text style={{ color: "#fff", fontSize: 11 }}>
+							Logout
+						</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
 		</View>
 	);
@@ -98,7 +123,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "#787878"
 	},
 	cardContainer: {
-		marginTop: 40,
+		marginTop: 40
 	},
 	cardStyle: {
 		flex: 1,
@@ -109,32 +134,26 @@ const styles = StyleSheet.create({
 		shadowColor: "#333",
 		shadowOpacity: 0.3,
 		shadowRadius: 2,
-		marginTop: 40,
 		borderRadius: 20,
 		marginTop: 40
 	},
-	logoutButton: {
+	profileLogoutContainer: {
+		position: "absolute",
 		backgroundColor: "#212121",
-		alignItems: "center",
-		justifyContent: "center",
-		alignSelf: "center",
-		paddingVertical: 20,
-		paddingHorizontal: 40,
-		marginTop: 55,
-		borderRadius: 30,
-		elevation: 2,
-		shadowOffset: { width: 10, height: 10 },
-		shadowColor: "#333",
-		shadowOpacity: 1.3,
-		shadowRadius: 30,
-		width: 200,
-		position: "relative",
-		bottom: 40
+		width: "100%",
+		bottom: 0,
+		height: 60,
+		flexDirection: "row-reverse",
+		flex: 1
 	},
-	logoutButtonText: {
-		fontWeight: "bold",
-		fontSize: 15,
-		textTransform: "uppercase",
-		color: "#fff"
+	profileSide: {
+		position: "absolute",
+		right: 100,
+		bottom: 5
+	},
+	logoutSide: {
+		position: "absolute",
+		left: 105,
+		bottom: 5
 	}
 });
