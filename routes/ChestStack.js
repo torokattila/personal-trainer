@@ -1,6 +1,5 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Alert, Button } from "react-native";
 
 import Header from "../components/Header";
 import Chest from "../components/Chest";

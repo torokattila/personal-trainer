@@ -119,7 +119,7 @@ export const Login = ({ navigation }) => {
 						<Text style={styles.loginButtonText}>Login</Text>
 					</TouchableOpacity>
 
-					<View style={styles.toggleLoginSugnupContainer}>
+					<View style={styles.toggleLoginSignupContainer}>
 						<Text style={styles.toggleLoginSignupText}>
 							Dont't you have an account?
 						</Text>
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
 		fontSize: 15,
 		textTransform: "uppercase"
 	},
-	toggleLoginSugnupContainer: {
+	toggleLoginSignupContainer: {
 		justifyContent: "center",
 		flexDirection: "row",
 		alignItems: "center",

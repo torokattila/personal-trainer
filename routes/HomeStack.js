@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Home from "../components/Home";
 import Header from "../components/Header";
+import Profile from "../components/Profile";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
 import SignupStack from "../routes/SignupStack";
@@ -43,9 +44,9 @@ export const HomeStack = ({ navigation }) =>
 				headerTitleStyle: {
 					color: "#3189DB",
 					fontFamily: "nunito-bold",
-                    fontSize: 30,
-                    textAlign: "center",
-                    marginRight: 60
+					fontSize: 30,
+					textAlign: "center",
+					marginRight: 60
 				}
 			}}
 		/>
@@ -56,6 +57,26 @@ export const HomeStack = ({ navigation }) =>
 			options={{
 				title: "Chest + Bicep",
 				headerShown: false
+			}}
+		/>
+
+		<Screen
+			name="Profile"
+			component={Profile}
+			options={{
+				headerTitleStyle: {
+					color: "#1976D2",
+					fontFamily: "nunito-bold",
+					fontSize: 30,
+					textAlign: "center",
+					marginRight: 60
+				},
+				headerStyle: {
+					backgroundColor: "#fff",
+					height: 120,
+					elevation: 0,
+				},
+				headerTintColor: "#1976D2"
 			}}
 		/>
 

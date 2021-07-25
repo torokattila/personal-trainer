@@ -124,7 +124,7 @@ export default function Home({ navigation }) {
 
 			<View style={styles.profileLogoutContainer}>
 				<View style={styles.profileSide}>
-					<TouchableOpacity>
+					<TouchableOpacity onPress={() => navigation.navigate("Profile")}>
 						<AntDesign
 							name="user"
 							size={27}
