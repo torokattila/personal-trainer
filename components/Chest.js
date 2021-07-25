@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import ListCard from '../shared/ListCard';
 import { chestTypeOne, chestTypeTwo, bicepTypeOne, bicepTypeTwo, bicepTypeThree } from '../workoutTypes';
+import UpdateExerciseButton from '../shared/UpdateExerciseButton';
 
 export default function Chest() {
     const [localChestTypeOne, setLocalChestTypeOne] = useState(chestTypeOne);
@@ -175,6 +176,8 @@ export default function Chest() {
                         )}
                     />
                 </View>
+
+                <UpdateExerciseButton type="Chest" />
             </ScrollView>
         </View>
     )

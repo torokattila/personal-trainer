@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import ListCard from '../shared/ListCard';
 import { backTypeOne, backTypeTwo, shoulderTypeOne, shoulderTypeTwo, shoulderTypeThree } from '../workoutTypes';
+import UpdateExerciseButton from '../shared/UpdateExerciseButton';
 
 export default function Back() {
     const [localBackTypeOne, setLocalBackTypeOne] = useState(backTypeOne);
@@ -170,8 +171,9 @@ export default function Back() {
                         )}
                     />
                 </View>
+                <UpdateExerciseButton type="Back" />
             </ScrollView>
-        </View >
+        </View>
     )
 }
 

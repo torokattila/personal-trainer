@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	StyleSheet,
 	View,
@@ -11,8 +11,11 @@ import {
 } from "react-native";
 import { Card, CardImage } from "react-native-cards";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import axios from "axios";
 
 export default function Home({ navigation }) {
+	const [username, setUsername] = useState("");
+	const [lastExercise, setLastExercise] = useState("");
 	const [workoutType, setWorkoutType] = useState([
 		{
 			name: "Chest",
@@ -34,14 +37,43 @@ export default function Home({ navigation }) {
 		}
 	]);
 
+	const getStorageData = async () => {
+		try {
+			await AsyncStorage.getItem("User").then(response => {
+				setUsername(JSON.parse(response).username);
+
+				const data = { userId: JSON.parse(response).userId };
+				axios
+					.post("http://192.168.1.71:3001/api/get_last_exercise", data)
+					.then(response => {
+						if (response.data.error) {
+							alert(response.data.error);
+							console.log(response.data.error);
+						} else {
+							setLastExercise(response.data.exerciseType);
+						}
+					});
+			});
+		} catch (error) {
+			alert(error);
+			console.log(error);
+		}
+	};
+
 	const removeStorage = async () => {
 		try {
+			setUsername("");
 			await AsyncStorage.removeItem("User");
+			await AsyncStorage.removeItem("ExerciseType");
 			navigation.navigate("Login");
 		} catch (error) {
 			alert(error);
 		}
 	};
+
+	useEffect(() => {
+		getStorageData();
+	}, []);
 
 	const logout = () => {
 		Alert.alert(
@@ -59,6 +91,13 @@ export default function Home({ navigation }) {
 
 	return (
 		<View style={styles.container}>
+			<View style={styles.welcomeContainer}>
+				<Text style={styles.welcomeText}>
+					Hello again {username}!
+				</Text>
+				{lastExercise !== "Nothing" && (<Text style={styles.welcomeText}>Your last exercise was: {lastExercise}</Text>)}
+			</View>
+
 			<View style={styles.cardContainer}>
 				<FlatList
 					data={workoutType}
@@ -122,8 +161,20 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		backgroundColor: "#787878"
 	},
+	welcomeContainer: {
+		flex: 1,
+		marginBottom: 20,
+		marginTop: 45
+	},
+	welcomeText: {
+		fontSize: 17,
+		color: "#fff",
+		fontWeight: "bold",
+		textAlign: "center",
+		marginBottom: 5
+	},
 	cardContainer: {
-		marginTop: 40
+		marginTop: 10
 	},
 	cardStyle: {
 		flex: 1,

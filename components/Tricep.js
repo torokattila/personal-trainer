@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import ListCard from '../shared/ListCard';
 import { tricepType } from '../workoutTypes';
+import UpdateExerciseButton from '../shared/UpdateExerciseButton';
 
 export default function Back() {
     const [localTricepType, setLocalTricepType] = useState(tricepType);
@@ -46,6 +47,8 @@ export default function Back() {
                         )}
                     />
                 </View>
+
+                <UpdateExerciseButton type="Tricep" />
             </ScrollView>
         </View>
     )
