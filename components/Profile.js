@@ -71,7 +71,7 @@ export const Profile = ({ navigation }) => {
 			};
 
 			axios
-				.post("http://192.168.1.71:3001/api/changecredentials", data)
+				.post("https://personal-trainer-phone-api.herokuapp.com/api/changecredentials", data)
 				.then(response => {
 					if (response.data.error) {
 						console.log(response.data.error);
@@ -88,7 +88,7 @@ export const Profile = ({ navigation }) => {
 		}
 	};
 
-    const removeStorage = async () => {
+	const removeStorage = async () => {
 		try {
 			await AsyncStorage.removeItem("User");
 			await AsyncStorage.removeItem("ExerciseType");
@@ -99,16 +99,16 @@ export const Profile = ({ navigation }) => {
 	};
 
 	const pressDeleteProfile = () => {
-        const data = { userId: userId };
+		const data = { userId: userId };
 		axios
-			.post("http://192.168.1.71:3001/api/deleteuser", data)
+			.post("https://personal-trainer-phone-api.herokuapp.com/api/deleteuser", data)
 			.then(response => {
 				if (response.data.error) {
 					setAlertMessage(response.data.error);
 					showAlert();
 				} else {
-                    removeStorage();
-                }
+					removeStorage();
+				}
 			});
 	};
 
@@ -139,91 +139,93 @@ export const Profile = ({ navigation }) => {
 	return (
 		<KeyboardAvoidingWrapper>
 			<View style={styles.profileContainer}>
-				<AwesomeAlert
-					show={showAlertWindow}
-					showProgress={false}
-					title=""
-					message={alertMessage}
-					closeOnTouchOutside={false}
-					closeOnHardwareBackPress={false}
-					showConfirmButton={true}
-					confirmText="OK"
-					confirmButtonColor="#3189DB"
-					onCancelPressed={() => {
-						hideAlert();
-					}}
-					onConfirmPressed={() => {
-						hideAlert();
-					}}
-				/>
+					<AwesomeAlert
+						show={showAlertWindow}
+						showProgress={false}
+						title=""
+						message={alertMessage}
+						closeOnTouchOutside={false}
+						closeOnHardwareBackPress={false}
+						showConfirmButton={true}
+						confirmText="OK"
+						confirmButtonColor="#3189DB"
+						onCancelPressed={() => {
+							hideAlert();
+						}}
+						onConfirmPressed={() => {
+							hideAlert();
+						}}
+					/>
 
-				<View style={styles.currentUsernameContainer}>
-					<Text style={styles.currentUsername}>
-						Your current username: {username}
+					<View style={styles.currentUsernameContainer}>
+						<Text style={styles.currentUsername}>
+							Your current username: {username}
+						</Text>
+					</View>
+
+					<Text style={styles.changeCredentialsTitle}>
+						Edit your credentials
 					</Text>
-				</View>
 
-				<Text style={styles.changeCredentialsTitle}>
-					Edit your credentials
-				</Text>
+					<View style={styles.changeCredentialsContainer}>
+						<Text style={styles.label}>Your new username:</Text>
+						<CustomTextInput
+							placeholder="Username"
+							icon="user"
+							onChangeText={text => setNewUsername(text)}
+							value={newUsername}
+							returnKeyType="next"
+							onSubmitEditing={() =>
+								oldPasswordRef.current.focus()}
+						/>
 
-				<View style={styles.changeCredentialsContainer}>
-					<Text style={styles.label}>Your new username:</Text>
-					<CustomTextInput
-						placeholder="Username"
-						icon="user"
-						onChangeText={text => setNewUsername(text)}
-						value={newUsername}
-						returnKeyType="next"
-						onSubmitEditing={() => oldPasswordRef.current.focus()}
-					/>
+						<Text style={styles.label}>Current password:</Text>
+						<CustomTextInput
+							placeholder="Password"
+							icon="lock"
+							secureTextEntry={hidePassword}
+							onChangeText={text => setOldPassword(text)}
+							isPassword={true}
+							hidePassword={hidePassword}
+							setHidePassword={setHidePassword}
+							value={oldPassword}
+							ref={oldPasswordRef}
+							returnKeyType="next"
+							onSubmitEditing={() =>
+								newPasswordRef.current.focus()}
+						/>
 
-					<Text style={styles.label}>Current password:</Text>
-					<CustomTextInput
-						placeholder="Password"
-						icon="lock"
-						secureTextEntry={hidePassword}
-						onChangeText={text => setOldPassword(text)}
-						isPassword={true}
-						hidePassword={hidePassword}
-						setHidePassword={setHidePassword}
-						value={oldPassword}
-						ref={oldPasswordRef}
-						returnKeyType="next"
-						onSubmitEditing={() => newPasswordRef.current.focus()}
-					/>
+						<Text style={styles.label}>New password:</Text>
+						<CustomTextInput
+							placeholder="New password"
+							icon="lock"
+							secureTextEntry={hidePassword}
+							onChangeText={text => setNewPassword(text)}
+							isPassword={true}
+							hidePassword={hidePassword}
+							setHidePassword={setHidePassword}
+							value={newPassword}
+							ref={newPasswordRef}
+						/>
 
-					<Text style={styles.label}>New password:</Text>
-					<CustomTextInput
-						placeholder="New password"
-						icon="lock"
-						secureTextEntry={hidePassword}
-						onChangeText={text => setNewPassword(text)}
-						isPassword={true}
-						hidePassword={hidePassword}
-						setHidePassword={setHidePassword}
-						value={newPassword}
-						ref={newPasswordRef}
-					/>
+						<TouchableOpacity
+							style={styles.changeCredentialsButton}
+							onPress={() => confirmChangeCredentials()}
+						>
+							<Text style={styles.changeCredentialsButtonText}>
+								change credentials
+							</Text>
+						</TouchableOpacity>
 
-					<TouchableOpacity
-						style={styles.changeCredentialsButton}
-						onPress={() => confirmChangeCredentials()}
-					>
-						<Text style={styles.changeCredentialsButtonText}>
-							change credentials
-						</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						style={styles.deleteProfileButton}
-						onPress={() => confirmDeleteProfile()}
-					>
-						<Text style={styles.deleteProfileButtonButtonText}>
-							delete profile
-						</Text>
-					</TouchableOpacity>
-				</View>
+						<TouchableOpacity
+							style={styles.deleteProfileButton}
+							onPress={() => confirmDeleteProfile()}
+						>
+							<Text style={styles.deleteProfileButtonButtonText}>
+								delete profile
+							</Text>
+						</TouchableOpacity>
+					</View>
 			</View>
 		</KeyboardAvoidingWrapper>
 	);
@@ -267,7 +269,6 @@ const CustomTextInput = React.forwardRef(
 const styles = StyleSheet.create({
 	profileContainer: {
 		flex: 1,
-		backgroundColor: "#fff",
 		alignItems: "center",
 		marginTop: 10
 	},

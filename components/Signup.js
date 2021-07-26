@@ -44,7 +44,7 @@ export const Signup = ({ navigation }) => {
             confirmPassword: confirmPassword
         };
 
-        axios.post("http://192.168.1.71:3001/api/registeruser", data).then(response => {
+        axios.post("https://personal-trainer-phone-api.herokuapp.com/api/registeruser", data).then(response => {
             if (response.data.error) {
                 setAlertMessage(response.data.error);
                 showAlert();

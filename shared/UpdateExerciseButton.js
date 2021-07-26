@@ -44,7 +44,7 @@ export const UpdateExerciseButton = ( props ) => {
 
         const data = { userId: userId, exerciseType: exerciseType };
 
-        axios.post("http://192.168.1.71:3001/api/update_exercise", data).then(response => {
+        axios.post("https://personal-trainer-phone-api.herokuapp.com/api/update_exercise", data).then(response => {
             if (response.data.error) {
                 alert(response.data.error);
             } else {

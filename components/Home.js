@@ -44,7 +44,7 @@ export default function Home({ navigation }) {
 
 				const data = { userId: JSON.parse(response).userId };
 				axios
-					.post("http://192.168.1.71:3001/api/get_last_exercise", data)
+					.post("https://personal-trainer-phone-api.herokuapp.com/api/get_last_exercise", data)
 					.then(response => {
 						if (response.data.error) {
 							alert(response.data.error);
