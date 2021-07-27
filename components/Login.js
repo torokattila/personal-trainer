@@ -39,7 +39,6 @@ export const Login = ({ navigation }) => {
 		const data = { username: name, password: password };
 
 		axios.post("https://personal-trainer-phone-api.herokuapp.com/api/loginuser", data).then(response => {
-			console.log(response.data)
 			if (response.data.error) {
 				setAlertMessage(response.data.error);
 				showAlert();
